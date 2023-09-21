@@ -32,9 +32,9 @@ export default {
   },
   watch: {
     async input(val) {
-      if (val.trim().length > 0) this.$emit('writing', true);
+      if (val.trim().length > 0) this.$emit('writing', val);
       else {
-        this.$emit('writing', this.input);
+        this.$emit('writing', '');
         await this.$store.dispatch('fetchUsers', []);
       }
     }
