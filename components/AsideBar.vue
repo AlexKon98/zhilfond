@@ -20,7 +20,7 @@ export default {
   data() {
     return {
       fetching: false,
-      input: false,
+      input: '',
     }
   },
   methods: {

@@ -34,8 +34,8 @@ export default {
     async input(val) {
       if (val.trim().length > 0) this.$emit('writing', true);
       else {
-        await this.$store.dispatch('fetchUsers', []);
         this.$emit('writing', this.input);
+        await this.$store.dispatch('fetchUsers', []);
       }
     }
   },
