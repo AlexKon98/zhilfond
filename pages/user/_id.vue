@@ -32,7 +32,7 @@
 export default {
   name: 'UserPage',
   validate({params, redirect}) {
-    let match = /^\d+$/.test(params.id);
+    let match = /^\d+$/.test(params.id) && params.id < 11;
     if (match) return match;
     else redirect('/404');
   },
