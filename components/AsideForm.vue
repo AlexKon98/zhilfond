@@ -30,14 +30,37 @@ export default {
       return this.$store.getters['users'];
     },
   },
+  watch: {
+    async input(val) {
+      if (val.trim().length > 0) this.$emit('writing', true);
+      else {
+        await this.$store.dispatch('fetchUsers', []);
+        this.$emit('writing', this.input);
+      }
+    }
+  },
   methods: {
+    fetching(value) {
+      this.$emit('fetching', value);
+    },
     debounce() {
       clearTimeout(this.timeout);
-      this.timeout = setTimeout(this.onKeyup, 750);
+      this.timeout = setTimeout(this.onKeyup, 500);
     },
     async onKeyup() {
       if (this.input.trim().length > 0) {
-        await this.$store.dispatch('fetchUsers', this.input);
+        this.fetching(true);
+        if (this.input.includes(',')) {
+          let arr = [] ;
+          this.input.split(', ').forEach(el => {
+            arr.push(el.trim().toLowerCase());
+          });
+          await this.$store.dispatch('fetchUsers', arr);
+          this.fetching(false);
+        } else {
+          await this.$store.dispatch('fetchUsers', [this.input.trim().toLowerCase()]);
+          this.fetching(false);
+        }
       }
     },
   },
@@ -52,6 +75,7 @@ export default {
 .send-form__label, .send-form__input {
   display: block;
   max-width: 100%;
+  width: 100%;
 }
 
 .send-form__label {

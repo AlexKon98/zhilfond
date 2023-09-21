@@ -1,10 +1,12 @@
 <template>
   <aside class="aside-bar">
-    <AsideForm />
+    <AsideForm @fetching="changeFetching" @writing="changeInput"/>
 
     <div class="title">Результаты</div>
-    <AsideList />
-    <AsideNote />
+    <AsideList v-if="!fetching && usersLength" :fetching="fetching" :input="input"/>
+    <AsideNote v-if="(!fetching && !usersLength) || (fetching)"
+      :fetching="fetching" :input="input"
+    />
   </aside>
 </template>
 
@@ -15,6 +17,25 @@ import AsideNote from './AsideNote.vue';
 
 export default {
   name: 'AsideBar',
+  data() {
+    return {
+      fetching: false,
+      input: false,
+    }
+  },
+  methods: {
+    changeFetching(value) {
+      this.fetching = value;
+    },
+    changeInput(value) {
+      this.input = value;
+    }
+  },
+  computed: {
+    usersLength() {
+      return this.$store.getters['users'].length;
+    }
+  },
   components: {
     AsideForm,
     AsideList,
@@ -25,7 +46,7 @@ export default {
 
 <style lang="scss" scoped>
 .aside-bar {
-  width: 290px;
+  width: 355px;
   padding: 27px 30px 27px 20px;
   border-right: 1px solid #E0E0E0;
 }

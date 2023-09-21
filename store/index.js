@@ -1,35 +1,55 @@
 export const state = () => ({
   users: [],
+  user: {},
+  error: {},
 });
 
 export const getters = {
-  users: store => store.users,
+  users: s => s.users,
+  user: s => s.user,
+  error: s => s.error,
 };
 
 export const mutations = {
   setUsers(state, users) {
     state.users = users;
+  },
+  setUser(state, user) {
+    state.user = user;
+  },
+  setError(state, error) {
+    state.error = error;
   }
 };
 
 export const actions = {
-  async fetchUsers({commit}, str) {
-    let query;
-
-    if (str.includes(',')) {
-      query = str.split(',');
-    } else {
-      query = [str];
-    }
-
-    let users = await this.$axios.$get('https://jsonplaceholder.typicode.com/users');
-
-    users = users.filter(user => {
-      query.forEach(q => {
-        return user.username.toLowerCase() === q.toLowerCase() || user.name.toLowerCase().includes(q.toLowerCase())
+  async fetchUsers({commit}, requests) {
+    commit('setUsers', []);
+    let users;
+    let checkArray = [];
+    try {
+      users = await this.$axios.$get('https://jsonplaceholder.typicode.com/users');
+      users.filter(user => {
+        requests.forEach(req => {
+          if (user.name.toLowerCase().includes(req) || user.username.toLowerCase() === req) checkArray.push(user)
+        });
       });
-    });
-
-    commit('setUsers', users);
+    } catch(e) {
+      commit('setError', e);
+      commit('setFound', false);
+    } finally {
+      commit('setUsers', checkArray);
+    }
+  },
+  async fetchUser({commit}, id) {
+    let user;
+    try {
+      user = await this.$axios.$get('https://jsonplaceholder.typicode.com/users/' + id);
+    } catch(e) {
+      console.log(e);
+      commit('setFound', e);
+    } finally {
+      commit('setUser', user);
+    }
   }
 };

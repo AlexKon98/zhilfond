@@ -27,4 +27,8 @@ export default {
   border-radius: 10px;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.10);
 }
+
+.main {
+  margin-bottom: 58px;
+}
 </style>
