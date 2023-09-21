@@ -47,7 +47,6 @@ export const actions = {
       user = await this.$axios.$get('https://jsonplaceholder.typicode.com/users/' + id);
     } catch(e) {
       console.log(e);
-      commit('setFound', e);
     } finally {
       commit('setUser', user);
     }

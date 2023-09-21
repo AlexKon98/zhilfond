@@ -1,7 +1,7 @@
 <template>
   <ul class="users__list">
     <li class="users__item" v-for="user in users" :key="user.id">
-      <nuxt-link no-prefetch class="users__img" :to="'/user_' + user.id">
+      <nuxt-link no-prefetch class="users__img" :to="'/user/' + user.id">
         <img v-if="user.img" :src="user.img" :alt="user.username">
         <img v-else src="~/static/no-photo.svg" alt="нет фото">
       </nuxt-link>

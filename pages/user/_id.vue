@@ -44,8 +44,10 @@ export default {
       return this.$store.getters['user'];
     }
   },
-  mounted() {
-    console.log(this.user);
+  head() {
+    return {
+      title: this.user.name
+    }
   }
 }
 </script>
