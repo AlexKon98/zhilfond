@@ -52,8 +52,8 @@ export default {
         this.fetching(true);
         if (this.input.includes(',')) {
           let arr = [] ;
-          this.input.split(', ').forEach(el => {
-            arr.push(el.trim().toLowerCase());
+          this.input.split(',').forEach(el => {
+            if (el.trim() !== '') arr.push(el.trim().toLowerCase());
           });
           await this.$store.dispatch('fetchUsers', arr);
           this.fetching(false);

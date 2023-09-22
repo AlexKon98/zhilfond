@@ -31,7 +31,7 @@ export const actions = {
       users = await this.$axios.$get('https://jsonplaceholder.typicode.com/users');
       users.filter(user => {
         requests.forEach(req => {
-          if (user.name.toLowerCase().includes(req) || user.username.toLowerCase() === req) checkArray.push(user)
+          if (user.name.toLowerCase().includes(req) || user.username.toLowerCase() === req) if (!checkArray.some(item => item.username === user.username)) checkArray.push(user)
         });
       });
     } catch(e) {
