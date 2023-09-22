@@ -32,9 +32,7 @@ export const actions = {
       users = await this.$axios.$get('https://jsonplaceholder.typicode.com/users');
 
       users = users.filter(user => {
-        return requests.some(req => user.name.toLowerCase().startsWith(req))
-        ||
-        requests.some(req => user.username.toLowerCase() === req)
+        return requests.some(req => user.name.toLowerCase().startsWith(req) || user.username.toLowerCase() === req)
         ||
         requests.some(req => user.id === Number(req));
       });
