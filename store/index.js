@@ -36,7 +36,6 @@ export const actions = {
       });
     } catch(e) {
       commit('setError', e);
-      commit('setFound', false);
     } finally {
       commit('setUsers', checkArray);
     }
