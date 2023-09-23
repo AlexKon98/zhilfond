@@ -19,14 +19,22 @@ export default {
   name: 'AsideBar',
   data() {
     return {
-      fetching: false,
-      input: '',
+      fetching: false, // состояние загрузки
+      input: '', // значение поля ввода поиска пользователей
     }
   },
   methods: {
+    /**
+     * Функция для эмита события изменения fetching
+     * @param value - boolean
+    */
     changeFetching(value) {
       this.fetching = value;
     },
+    /**
+     * Функция для эмита события изменения значения поля ввода поиска пользователей
+     * @param value - string
+    */
     changeInput(value) {
       this.input = value;
     }

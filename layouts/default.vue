@@ -15,6 +15,7 @@ import Header from "~/components/Header.vue";
 import AsideBar from "~/components/AsideBar.vue";
 
 export default {
+  name: 'DefaultPage',
   components: { Header, AsideBar },
 }
 </script>

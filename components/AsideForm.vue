@@ -31,6 +31,10 @@ export default {
     },
   },
   watch: {
+    /**
+     * Watcher значения инпута поиска пользователей с эмитом для пробрасывания данных между компонентами
+     * @param val - текстовое значение инпута
+    */
     async input(val) {
       if (val.trim().length > 0) this.$emit('writing', val);
       else {
@@ -40,6 +44,10 @@ export default {
     }
   },
   methods: {
+    /**
+     * Функция для эмита события изменения значения состояния загрузки
+     * @param value - boolean
+    */
     fetching(value) {
       this.$emit('fetching', value);
     },

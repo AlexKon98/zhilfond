@@ -2,6 +2,8 @@
   <section class="not-found">
     <div>
       <h1>Пользователь не найден</h1>
+      <p v-if="error.code">Код ошибки {{ error.code }}</p>
+      <p v-if="error.message">{{ error.message }}</p>
       <nuxt-link to="/">На главную</nuxt-link>
     </div>
   </section>
@@ -10,6 +12,11 @@
 <script>
 export default {
   name: 'ErrorPage',
+  computed: {
+    error() {
+      return this.$store.getters['error'];
+    },
+  }
 }
 </script>
 

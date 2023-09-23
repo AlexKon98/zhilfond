@@ -23,9 +23,13 @@ export const mutations = {
 };
 
 export const actions = {
+  /**
+   * Функция запроса к апи для получения списка пользователей
+   * @param requests - значение инпута поиска, преобразованное в массив для удобства фильтрации
+  */
   async fetchUsers({commit}, requests) {
     commit('setUsers', []);
-
+    console.log($nuxt)
     let users;
 
     try {
@@ -42,13 +46,18 @@ export const actions = {
       commit('setUsers', users);
     }
   },
+  /**
+   * Функция запроса к апи для получения пользователя по id
+   * @param id - значение id нужого пользователя
+  */
   async fetchUser({commit}, id) {
     let user;
 
     try {
       user = await this.$axios.$get('https://jsonplaceholder.typicode.com/users/' + id);
     } catch(e) {
-      console.log(e);
+      commit('setError', e);
+      $nuxt.$router.push('/404');
     } finally {
       commit('setUser', user);
     }

@@ -9,9 +9,6 @@
     <div class="aside-bar__message" v-if="input && !fetching && !usersLength">
       Ничего не найдено
     </div>
-    <div class="aside-bar__message error" v-if="error">
-      {{ error.message }}
-    </div>
   </div>
 </template>
 
@@ -30,9 +27,6 @@ export default {
   computed: {
     usersLength() {
       return this.$store.getters['users'].length;
-    },
-    error() {
-      return this.$store.getters['error'];
     },
     inputLength() {
       return this.input.length > 0;

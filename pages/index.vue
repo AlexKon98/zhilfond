@@ -7,6 +7,7 @@
 <script>
 export default {
   name: 'IndexPage',
+  // Изменение Заголовка вкладки текущей страницы
   head() {
     return {
       title: 'Жилфонд'
