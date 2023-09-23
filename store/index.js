@@ -29,7 +29,7 @@ export const actions = {
   */
   async fetchUsers({commit}, requests) {
     commit('setUsers', []);
-    console.log($nuxt)
+
     let users;
 
     try {
@@ -42,6 +42,7 @@ export const actions = {
       });
     } catch(e) {
       commit('setError', e);
+      $nuxt.$router.push('/404');
     } finally {
       commit('setUsers', users);
     }
