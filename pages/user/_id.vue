@@ -68,6 +68,7 @@ export default {
   display: flex;
   padding: 30px 30px 30px 21px;
   min-height: 575px;
+  width: calc(100% - 355px);
 }
 
 .user__information {
